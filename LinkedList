@@ -1,0 +1,63 @@
+import TerminalIO.KeyboardReader;
+
+public class LinkedList {
+
+	public static void main(String[] args) {
+		KeyboardReader reader = new KeyboardReader();
+		Node start = new Node();
+		char answer = 'n', letter = 'a';
+
+		letter = reader.readChar("Enter a letter: ");
+		start.letter = letter;
+		Node.Print(start);
+		answer = reader.readChar("Would you like to enter another letter(Y/N) ");
+		
+		Node chain = new Node();
+		Node cntr = new Node();
+		boolean checker = false;
+		start.nodeptr = new Node();
+		chain = start.nodeptr;
+		do{
+			Node change = new Node();
+			Node temp = new Node();
+			temp.letter = reader.readChar("Enter a letter: ");
+			cntr = start;
+			checker = false;
+			
+			while (checker == false){
+				
+				if (start.letter > temp.letter){
+					change = start;
+					start = temp;
+					temp.nodeptr = change;
+					checker = true;
+				}
+				
+				else if (Character.getNumericValue(cntr.letter) == -1){
+					chain.letter = temp.letter;
+					chain.nodeptr = new Node();
+					chain = chain.nodeptr;
+					checker = true;
+				}
+					
+				else if ((cntr.letter < temp.letter)&&(cntr.nodeptr.letter > temp.letter)){
+					temp.nodeptr = cntr.nodeptr;
+					cntr.nodeptr = temp;
+					checker = true;
+				}
+				
+				
+				if (checker == false)
+					cntr = cntr.nodeptr;
+			}
+			
+			Node.Print(start);
+			answer = reader.readChar("Would you like to enter another letter(Y/N) ");
+		
+		}while ((answer == 'Y')||(answer == 'y'));
+		
+		Node.Print(start);
+
+	}
+
+}
