@@ -12,13 +12,11 @@ public class LinkedList {
 		Node.Print(start);
 		answer = reader.readChar("Would you like to enter another letter(Y/N) ");
 		
-		Node chain = new Node();
 		Node cntr = new Node();
 		boolean checker = false;
 		start.nodeptr = new Node();
-		chain = start.nodeptr;
+		
 		do{
-			Node change = new Node();
 			Node temp = new Node();
 			temp.letter = reader.readChar("Enter a letter: ");
 			cntr = start;
@@ -27,16 +25,15 @@ public class LinkedList {
 			while (checker == false){
 				
 				if (start.letter > temp.letter){
-					change = start;
+					temp.nodeptr = start;
 					start = temp;
-					temp.nodeptr = change;
 					checker = true;
 				}
 				
 				else if (Character.getNumericValue(cntr.letter) == -1){
-					chain.letter = temp.letter;
-					chain.nodeptr = new Node();
-					chain = chain.nodeptr;
+					cntr.letter = temp.letter;
+					cntr.nodeptr = new Node();
+					cntr = cntr.nodeptr;
 					checker = true;
 				}
 					
@@ -45,7 +42,6 @@ public class LinkedList {
 					cntr.nodeptr = temp;
 					checker = true;
 				}
-				
 				
 				if (checker == false)
 					cntr = cntr.nodeptr;
